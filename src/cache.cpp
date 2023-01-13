@@ -784,7 +784,9 @@ void Cache::assembleReport(const Settings &config, const QString filter)
       resTypeList.append("cover");
       resTypeList.append("screenshot");
       resTypeList.append("wheel");
-      resTypeList.append("marquee");
+      if(config.cacheMarquees){
+        resTypeList.append("marquee");
+      }
       resTypeList.append("texture");
       resTypeList.append("video");
     } else if(missingOption == "textual") {
@@ -802,13 +804,17 @@ void Cache::assembleReport(const Settings &config, const QString filter)
       resTypeList.append("cover");
       resTypeList.append("screenshot");
       resTypeList.append("wheel");
-      resTypeList.append("marquee");
+      if(config.cacheMarquees){
+        resTypeList.append("marquee");
+      }
       resTypeList.append("texture");
     } else if(missingOption == "media") {
       resTypeList.append("cover");
       resTypeList.append("screenshot");
       resTypeList.append("wheel");
-      resTypeList.append("marquee");
+      if(config.cacheMarquees){
+        resTypeList.append("marquee");
+      }
       resTypeList.append("texture");
       resTypeList.append("video");
     } else {
