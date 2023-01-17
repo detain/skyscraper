@@ -226,6 +226,17 @@ QString Pegasus::fromPreservedHeader(const QString &key, const QString &suggeste
   return suggested;
 }
 
+bool Pegasus::hasPreservedHeader(const QString &key)
+{
+  for(int a = 0; a < headerPairs.length(); ++a) {
+    if(key == headerPairs.at(a).first) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
 void Pegasus::removePreservedHeader(const QString &key)
 {
   for(int a = headerPairs.length() - 1; a >= 0; --a) {
@@ -280,19 +291,30 @@ void Pegasus::assembleList(QString &finalOutput, QList<GameEntry> &gameEntries)
     finalOutput.append("shortname: " + fromPreservedHeader("shortname", config->platform) + "\n");
     // finalOutput.append("extensions: " + fromPreservedHeader("extensions", extensions) + "\n");
     if(config->frontendExtra.isEmpty()) {
-      finalOutput.append("command: " + fromPreservedHeader("command", "/opt/retropie/supplementary/runcommand/runcommand.sh 0 _SYS_ " + config->platform + " \"{file.path}\"") + "\n");
+      if(!hasPreservedHeader("command") && !hasPreservedHeader("launch")) {
+        finalOutput.append("command: " + fromPreservedHeader("command", "/opt/retropie/supplementary/runcommand/runcommand.sh 0 _SYS_ " + config->platform + " \"{file.path}\"") + "\n");
+      }
     } else {
       //finalOutput.append("command: " + config->frontendExtra.replace(":","") + "\n");
       finalOutput.append("command: " + config->frontendExtra + "\n");
       removePreservedHeader("command");
     }
-    if(!headerPairs.isEmpty()) {
-      for(const auto &pair: headerPairs) {
-	finalOutput.append(toPegasusFormat(pair.first, pair.second) + "\n");
+  }
+  if(!headerPairs.isEmpty()) {
+    for(const auto &pair: headerPairs) {
+      if(pair.first != "command" && pair.first != "launch") {
+        finalOutput.append(toPegasusFormat(pair.first, pair.second) + "\n");
       }
     }
-    finalOutput.append("\n");
   }
+  // save command/launch for last
+  if(hasPreservedHeader("command")) {
+    finalOutput.append(toPegasusFormat("command", fromPreservedHeader("command", "")) + "\n");
+  } else {
+    finalOutput.append(toPegasusFormat("launch", fromPreservedHeader("launch", "")) + "\n");
+  }
+  finalOutput.append("\n");
+
   int dots = 0;
   // Always make dotMod at least 1 or it will give "floating point exception" when modulo
   int dotMod = gameEntries.length() * 0.1 + 1;
