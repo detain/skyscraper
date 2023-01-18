@@ -20,7 +20,17 @@ Skyscraper will preserve the following metadata when re-generating a game list f
 * Default game list location: `/home/pi/USER/RetroPie/roms/PLATFORM`
 * Default game list filename: `gamelist.xml`
 
-This is modeled after EmualtionStation as it uses it with slight differences.
+This is modeled after EmulationStation as it uses it with slight differences.
+
+#### Miyoo
+* Default game list location: (should be specified to the Miyoo SD card)
+* Default game list filename: `miyoogamelist.xml`
+
+Outputs a [miyoogamelist.xml](https://github.com/OnionUI/Onion/wiki/Frequently-Asked-Questions-%28FAQ%29#how-can-i-use-a-miyoogamelistxml-to-customise-game-names) for [Onion OS](https://github.com/OnionUI/Onion/) on Miyoo Mini devices.
+
+`miyoogamelist.xml` is similar to EmulationStation's `gamelist.xml` but only contains a `<path>`, `<name>` and `<image>` field for each `<game>`.
+
+Screenshots will always be placed in a sub-path of the input directory, under `./Imgs/`.
 
 #### Attract-Mode
 * Default game list location: `/home/pi/USER/.attract/romlists`

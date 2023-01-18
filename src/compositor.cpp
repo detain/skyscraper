@@ -300,30 +300,45 @@ void Compositor::saveAll(GameEntry &game, QString completeBaseName)
     QString filename = "/" + completeBaseName + ".png";
     if(output.resType == "cover") {
       filename.prepend(config->coversFolder);
+      if(config->coversFolder == NULL) {
+        continue;
+      }
       if(config->skipExistingCovers && QFileInfo::exists(filename)) {
 	game.coverFile = filename;
 	continue;
       }
     } else if(output.resType == "screenshot") {
       filename.prepend(config->screenshotsFolder);
+      if(config->screenshotsFolder == NULL) {
+        continue;
+      }
       if(config->skipExistingScreenshots && QFileInfo::exists(filename)) {
 	game.screenshotFile = filename;
 	continue;
       }
     } else if(output.resType == "wheel") {
       filename.prepend(config->wheelsFolder);
+      if(config->wheelsFolder == NULL) {
+        continue;
+      }
       if(config->skipExistingWheels && QFileInfo::exists(filename)) {
 	game.wheelFile = filename;
 	continue;
       }
     } else if(output.resType == "marquee") {
       filename.prepend(config->marqueesFolder);
+      if(config->marqueesFolder == NULL) {
+        continue;
+      }
       if(config->skipExistingMarquees && QFileInfo::exists(filename)) {
-	game.marqueeFile = filename;
+ 	game.marqueeFile = filename;
 	continue;
       }
     } else if (output.resType == "texture") {
       filename.prepend(config->texturesFolder);
+      if(config->texturesFolder == NULL) {
+        continue;
+      }
       if (config->skipExistingTextures && QFileInfo::exists(filename)) {
         game.textureFile = filename;
         continue;
