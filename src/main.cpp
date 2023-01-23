@@ -201,7 +201,7 @@ int main(int argc, char *argv[])
   parser.addHelpOption();
   parser.addVersionOption();
   QCommandLineOption pOption("p", "The platform you wish to scrape.\n(Currently supports " + platforms + ".)", "PLATFORM", "");
-  QCommandLineOption fOption("f", "The frontend you wish to generate a gamelist for. Remember to leave out the '-s' option when using this in order to enable Skyscraper's gamelist generation mode.\n(Currently supports 'emulationstation', 'retrobat', 'attractmode' and 'pegasus'. Default is 'emulationstation')", "FRONTEND", "");
+  QCommandLineOption fOption("f", "The frontend you wish to generate a gamelist for. Remember to leave out the '-s' option when using this in order to enable Skyscraper's gamelist generation mode.\n(Currently supports 'emulationstation', 'retrobat', 'miyoo', 'attractmode' and 'pegasus'. Default is 'emulationstation')", "FRONTEND", "");
   QCommandLineOption eOption("e", "Set extra frontend option. This is required by the 'attractmode' frontend to set the emulator and optionally for the 'pegasus' frontend to set the launch command.\n(Default is none)", "STRING", "");
   QCommandLineOption iOption("i", "Folder which contains the game/rom files.\n(default is '/home/USER/RetroPie/roms/PLATFORM')", "PATH", "");
   QCommandLineOption gOption("g", "Game list export folder.\n(default depends on frontend)", "PATH", "");

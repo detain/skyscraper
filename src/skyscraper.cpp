@@ -49,6 +49,7 @@
 
 #include "emulationstation.h"
 #include "retrobat.h"
+#include "miyoo.h"
 #include "attractmode.h"
 #include "pegasus.h"
 
@@ -86,12 +87,22 @@ void Skyscraper::run()
   }
   printf("Input folder:       '\033[1;32m%s\033[0m'\n", config.inputFolder.toStdString().c_str());
   printf("Game list folder:   '\033[1;32m%s\033[0m'\n", config.gameListFolder.toStdString().c_str());
-  printf("Covers folder:      '\033[1;32m%s\033[0m'\n", config.coversFolder.toStdString().c_str());
-  printf("Screenshots folder: '\033[1;32m%s\033[0m'\n", config.screenshotsFolder.toStdString().c_str());
-  printf("Wheels folder:      '\033[1;32m%s\033[0m'\n", config.wheelsFolder.toStdString().c_str());
-  printf("Marquees folder:    '\033[1;32m%s\033[0m'\n", config.marqueesFolder.toStdString().c_str());
-  printf("Textures folder:    '\033[1;32m%s\033[0m'\n", config.texturesFolder.toStdString().c_str());
-  if(config.videos) {
+  if(config.coversFolder != NULL) {
+    printf("Covers folder:      '\033[1;32m%s\033[0m'\n", config.coversFolder.toStdString().c_str());
+  }
+  if(config.screenshotsFolder != NULL) {
+    printf("Screenshots folder: '\033[1;32m%s\033[0m'\n", config.screenshotsFolder.toStdString().c_str());
+  }
+  if(config.wheelsFolder != NULL) {
+    printf("Wheels folder:      '\033[1;32m%s\033[0m'\n", config.wheelsFolder.toStdString().c_str());
+  }
+  if(config.marqueesFolder != NULL) {
+    printf("Marquees folder:    '\033[1;32m%s\033[0m'\n", config.marqueesFolder.toStdString().c_str());
+  }
+  if(config.texturesFolder != NULL) {
+    printf("Textures folder:    '\033[1;32m%s\033[0m'\n", config.texturesFolder.toStdString().c_str());
+  }
+  if(config.videos && config.videosFolder != NULL) {
     printf("Videos folder:      '\033[1;32m%s\033[0m'\n", config.videosFolder.toStdString().c_str());
   }
   printf("Cache folder:       '\033[1;32m%s\033[0m'\n", config.cacheFolder.toStdString().c_str());
@@ -202,32 +213,42 @@ void Skyscraper::run()
     checkForFolder(gameListDir);
   config.gameListFolder = gameListDir.absolutePath();
 
-  QDir coversDir(config.coversFolder);
-  if(config.scraper == "cache" && !config.pretend)
-    checkForFolder(coversDir);
-  config.coversFolder = coversDir.absolutePath();
+  if(config.coversFolder != NULL) {
+    QDir coversDir(config.coversFolder);
+    if(config.scraper == "cache" && !config.pretend)
+      checkForFolder(coversDir);
+    config.coversFolder = coversDir.absolutePath();
+  }
 
-  QDir screenshotsDir(config.screenshotsFolder);
-  if(config.scraper == "cache" && !config.pretend)
-    checkForFolder(screenshotsDir);
-  config.screenshotsFolder = screenshotsDir.absolutePath();
+  if(config.screenshotsFolder != NULL) {
+    QDir screenshotsDir(config.screenshotsFolder);
+    if(config.scraper == "cache" && !config.pretend)
+      checkForFolder(screenshotsDir);
+    config.screenshotsFolder = screenshotsDir.absolutePath();
+  }
 
-  QDir wheelsDir(config.wheelsFolder);
-  if(config.scraper == "cache" && !config.pretend)
-    checkForFolder(wheelsDir);
-  config.wheelsFolder = wheelsDir.absolutePath();
+  if(config.wheelsFolder != NULL) {
+    QDir wheelsDir(config.wheelsFolder);
+    if(config.scraper == "cache" && !config.pretend)
+      checkForFolder(wheelsDir);
+    config.wheelsFolder = wheelsDir.absolutePath();
+  }
 
-  QDir marqueesDir(config.marqueesFolder);
-  if(config.scraper == "cache" && !config.pretend)
-    checkForFolder(marqueesDir);
-  config.marqueesFolder = marqueesDir.absolutePath();
+  if(config.marqueesFolder != NULL) {
+    QDir marqueesDir(config.marqueesFolder);
+    if(config.scraper == "cache" && !config.pretend)
+      checkForFolder(marqueesDir);
+    config.marqueesFolder = marqueesDir.absolutePath();
+  }
 
-  QDir texturesDir(config.texturesFolder);
-  if (config.scraper == "cache" && !config.pretend)
-    checkForFolder(texturesDir);
-  config.texturesFolder = texturesDir.absolutePath();
+  if(config.texturesFolder != NULL) {
+    QDir texturesDir(config.texturesFolder);
+    if (config.scraper == "cache" && !config.pretend)
+      checkForFolder(texturesDir);
+    config.texturesFolder = texturesDir.absolutePath();
+  }
 
-  if(config.videos) {
+  if(config.videos && config.videosFolder != NULL) {
     QDir videosDir(config.videosFolder);
     if(config.scraper == "cache" && !config.pretend)
       checkForFolder(videosDir);
@@ -679,6 +700,7 @@ void Skyscraper::loadConfig(const QCommandLineParser &parser)
   settings.endGroup();
   if(parser.isSet("f") && (parser.value("f") == "emulationstation" ||
 			   parser.value("f") == "retrobat" ||
+			   parser.value("f") == "miyoo" ||
 			   parser.value("f") == "attractmode" ||
 			   parser.value("f") == "pegasus")) {
     config.frontend = parser.value("f");
@@ -687,6 +709,8 @@ void Skyscraper::loadConfig(const QCommandLineParser &parser)
     frontend = new EmulationStation;
   } else if(config.frontend == "retrobat") {
     frontend = new RetroBat;
+  } else if(config.frontend == "miyoo") {
+    frontend = new Miyoo;
   } else if(config.frontend == "attractmode") {
     frontend = new AttractMode;
   } else if(config.frontend == "pegasus") {
@@ -1110,7 +1134,7 @@ void Skyscraper::loadConfig(const QCommandLineParser &parser)
     config.mediaFolder = settings.value("mediaFolder").toString();
     mediaFolderSet = true;
   }
-  if(settings.contains("mediaFolderHidden") && (config.frontend == "emulationstation" || config.frontend == "retrobat")) {
+  if(settings.contains("mediaFolderHidden") && (config.frontend == "emulationstation" || config.frontend == "retrobat" || config.frontend == "miyoo")) {
     config.mediaFolderHidden = settings.value("mediaFolderHidden").toBool();
   }
   if(settings.contains("skipped")) {
@@ -1517,7 +1541,7 @@ void Skyscraper::loadConfig(const QCommandLineParser &parser)
   config.marqueesFolder = frontend->getMarqueesFolder();
   config.texturesFolder = frontend->getTexturesFolder();
   config.videosFolder = frontend->getVideosFolder();
-
+  
   // Choose default scraper for chosen platform if none has been set yet
   if(config.scraper.isEmpty()) {
     config.scraper = Platform::get().getDefaultScraper();

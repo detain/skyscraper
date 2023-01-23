@@ -56,10 +56,12 @@ Scripter::Scripter()
   printf("Available frontends:\n");
   printf("* \033[1;33memulationstation\033[0m\n");
   printf("* \033[1;33mretrobat\033[0m\n");
+  printf("* \033[1;33mmiyoo\033[0m\n");
   printf("* \033[1;33mattractmode\033[0m\n");
   printf("* \033[1;33mpegasus\033[0m\n");
   while(frontendStr != "emulationstation" &&
 	frontendStr != "retrobat" &&
+	frontendStr != "miyoo" &&
 	frontendStr != "attractmode" &&
 	frontendStr != "pegasus" &&
 	frontendStr != "") {
@@ -128,7 +130,7 @@ Scripter::Scripter()
   getline(std::cin, bracketsStr);
 
   std::string relativeStr = "";
-  if(frontendStr == "emulationstation" || frontendStr == "retrobat") {
+  if(frontendStr == "emulationstation" || frontendStr == "retrobat" || frontendStr == "miyoo") {
     printf("\033[1;34mDo you wish to force rom relative paths in the exported gamelist.xml file?\033[0m (y/N)? ");
     getline(std::cin, relativeStr);
   }
