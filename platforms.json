@@ -90,7 +90,7 @@
 		{"name":"vic20","scrapers":["screenscraper"],"formats":["*.crt", "*.d64", "*.prg", "*.tap", "*.t64", "*.g64", "*.x64", "*.vsf"],"aliases":["commodore vic-20", "vic-20"]},
 		{"name":"videopac","scrapers":["screenscraper"],"formats":["*.bin"],"aliases":["odyssey 2", "magnavox odyssey 2", "videopac g7000", "philips videopac g7000", "videopac+ g7400", "magnavox odyssey²"]},
 		{"name":"virtualboy","scrapers":["screenscraper"],"formats":["*.vb"],"aliases":["nintendo virtual boy", "virtual boy"]},
-		{"name":"wii","scrapers":["thegamesdb", "screenscraper"],"formats":["*.iso", "*.cso", "*.gcz", "*.wbfs", "*.rvz"],"aliases":["nintendo wii", "wiiware"]},
+		{"name":"wii","scrapers":["thegamesdb", "screenscraper"],"formats":["*.iso", "*.cso", "*.gcz", "*.wbfs", "*.rvz", "*.wad"],"aliases":["nintendo wii", "wiiware"]},
 		{"name":"wiiu","scrapers":["thegamesdb", "screenscraper"],"formats":["*.iso", "*.cso", "*.gcz", "*.wbfs", "*.wud", "*.wux", "*.rpx", "*.app"],"aliases":["nintendo wii u", "wii u", "wiiware"]},
 		{"name":"wonderswan","scrapers":["screenscraper"],"formats":["*.ws"],"aliases":[]},
 		{"name":"wonderswancolor","scrapers":["screenscraper"],"formats":["*.wsc"],"aliases":["wonderswan color"]},
