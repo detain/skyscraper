@@ -84,6 +84,7 @@
 		{"name":"snes","scrapers":["openretro", "screenscraper"],"formats":["*.smc", "*.sfc", "*.fig", "*.swc", "*.mgd", "*.bin"],"aliases":["super nintendo (snes)", "super nintendo entertainment system (snes)", "super nintendo", "super famicom", "nintendo power", "satellaview", "sufami turbo", "snes - super mario world hacks", "super nintendo msu-1"]},
 		{"name":"steam","scrapers":["screenscraper"],"formats":[],"aliases":["pc dos", "pc win3.xx", "dos", "windows", "windows apps", "pc (microsoft windows)", "steamos", "microsoft xbox one", "sony playstation 4"]},
 		{"name":"switch","scrapers":["screenscraper"],"formats":["*.xci", "*.nsp", "*.nca"],"aliases":["nintendo switch"]},
+		{"name":"tg16","scrapers":["openretro","screenscraper"],"formats":["*.pce", "*.chd", "*.cue"],"aliases":["turbografx 16", "turbografx cd", "turbografx-16", "turbografx-16/pc engine", "turbografx-16/pc engine cd", "pc engine", "pc engine cd-rom", "pc engine supergrafx"]},
 		{"name":"ti99","scrapers":["screenscraper"],"formats":["*.ctg"],"aliases":["ti-99/4a", "texas instruments ti-99", "texas instruments ti-99/4a"]},
 		{"name":"trs-80","scrapers":["screenscraper"],"formats":["*.dsk"],"aliases":["trs-80 color computer"]},
 		{"name":"vectrex","scrapers":["screenscraper"],"formats":["*.bin", "*.gam", "*.vec"],"aliases":[]},

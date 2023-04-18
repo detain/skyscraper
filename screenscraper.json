@@ -83,6 +83,7 @@
 		{"name":"snes","id":4},
 		{"name":"steam","id":138},
 		{"name":"switch","id":225},
+		{"name":"tg16","id":31},
 		{"name":"ti99","id":205},
 		{"name":"trs-80","id":144},
 		{"name":"vectrex","id":102},
