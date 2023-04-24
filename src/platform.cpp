@@ -76,6 +76,7 @@ void Platform::loadConfig(const QString& configPath)
             platformToAliases[platformName].push_back(aliasName);
         }
     }
+    platforms.sort();
 }
 
 void Platform::clearConfigData()
